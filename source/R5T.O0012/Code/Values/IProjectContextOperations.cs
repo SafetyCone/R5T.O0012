@@ -5,6 +5,7 @@ using R5T.F0000;
 using R5T.L0031.Extensions;
 using R5T.L0040.T000;
 using R5T.T0131;
+using R5T.T0172;
 using R5T.T0187;
 using R5T.T0198;
 using R5T.T0201;
@@ -18,6 +19,25 @@ namespace R5T.O0012
     [ValuesMarker]
     public partial interface IProjectContextOperations : IValuesMarker
     {
+        public Func<IProjectContext, Task> Create_WebServerForBlazorClient(
+            IProjectDescription projectDescription,
+            IsSet<IRepositoryUrl> repositoryUrl,
+            IProjectFilePath clientProjectFilePath,
+            Func<IProjectFilePath, Task> projectFilePathHandler)
+        {
+            return Instances.ProjectContextOperations_L0040.Create_New_Project(
+                Instances.ProjectFileContextOperations.Setup_WebServerForBlazorClientProjectFile(
+                    projectDescription,
+                    repositoryUrl,
+                    clientProjectFilePath
+                ),
+                Instances.ProjectContextOperations_L0040.Setup_WebServerForBlazorClient(
+                    projectDescription
+                ),
+                projectFilePathHandler
+            );
+        }
+
         public Func<IProjectContext, Task> Create_ConstructionProject(
             IProjectDescription projectDescription,
             IsSet<IRepositoryUrl> repositoryUrl,
