@@ -22,14 +22,14 @@ namespace R5T.O0012
         public Func<IProjectContext, Task> Create_WebServerForBlazorClient(
             IProjectDescription projectDescription,
             IsSet<IRepositoryUrl> repositoryUrl,
-            IProjectFilePath clientProjectFilePath,
+            Func<IProjectFilePath> clientProjectFilePathProvider,
             Func<IProjectFilePath, Task> projectFilePathHandler)
         {
             return Instances.ProjectContextOperations_L0040.Create_New_Project(
                 Instances.ProjectFileContextOperations.Setup_WebServerForBlazorClientProjectFile(
                     projectDescription,
                     repositoryUrl,
-                    clientProjectFilePath
+                    clientProjectFilePathProvider
                 ),
                 Instances.ProjectContextOperations_L0040.Setup_WebServerForBlazorClient(
                     projectDescription
